@@ -6,12 +6,12 @@ minimum_time = 20 # In seconds
 
 for fltname in glob.glob("*_flt.fits"):
     fflt = pyfits.open(fltname)
-    print fflt[0].header["EXPTIME"]
-    print fflt.info()
+    print(fflt[0].header["EXPTIME"])
+    print(fflt.info())
     
     
     fima = pyfits.open(fltname.replace("_flt.", "_ima."))
-    print fima.info()
+    print(fima.info())
     
     last_frame = 0.
     
@@ -20,7 +20,7 @@ for fltname in glob.glob("*_flt.fits"):
         samptime = fima[i].header["SAMPTIME"]
         deltatime = fima[i].header["DELTATIM"]
         
-        print i, sampnum, deltatime, samptime
+        print(i, sampnum, deltatime, samptime)
         
         fflt["SCI"].data = (fima[i].data[5:-5,5:-5]*samptime - last_frame)/deltatime
         fflt["DQ"].data = fima[i+2].data[5:-5,5:-5]
