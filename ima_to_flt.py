@@ -1,16 +1,16 @@
-import pyfits
+from astropy.io import fits
 from numpy import *
 import glob
 
 minimum_time = 20 # In seconds
 
 for fltname in glob.glob("*_flt.fits"):
-    fflt = pyfits.open(fltname)
+    fflt = fits.open(fltname)
     print(fflt[0].header["EXPTIME"])
     print(fflt.info())
     
     
-    fima = pyfits.open(fltname.replace("_flt.", "_ima."))
+    fima = fits.open(fltname.replace("_flt.", "_ima."))
     print(fima.info())
     
     last_frame = 0.
